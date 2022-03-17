@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}Message Board{% endblock %}</title>
+</head>
+<body>
+  <main>
+    <h1>Message Board</h1>
+    {% if user.is_authenticated %}
+      Hi {{ user.username }}!
+    {% endif %}
+    {% block content %}
+    {% endblock %}
+  </main>
+</body>
+</html>

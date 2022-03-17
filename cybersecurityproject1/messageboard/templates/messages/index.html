@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Messages{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  You are logged in as <em>{{ user.username }}</em>
+  <a href="{% url 'logout' %}">Log Out</a>
+{% endif %}
+<h2>Messages</h2>
+{% if messages %}
+  <ul>
+  {% for m in messages %}
+    <li>{{ m }} <em>{{ m.user }}</em></li>
+  {% endfor %}
+  </ul>
+{% else %}
+  <p>No messages are available.</p>
+{% endif %}
+<h3>Search by message content</h3>
+<form action="{% url 'search' %}" method="get">
+  <input name="q" type="text">
+  <input type="submit" value="Search">
+</form>
+<h3>New message</h3>
+<form action="/messages/" method="post">
+  {% csrf_token %}
+  <input type="text" name="content">
+  <input type="submit" value="Save">
+</form>
+{% endblock %}

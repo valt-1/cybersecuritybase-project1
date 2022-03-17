@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Search Results{% endblock %}
+
+{% block content %}
+<h2>Search Results</h2>
+{% if messages %}
+  <ul>
+  {% for m in messages %}
+    <li>{{ m.content }} <em>{{ m.user }}</em></li>
+  {% endfor %}
+  </ul>
+{% else %}
+  <p>No results.</p>
+{% endif %}
+<p><a href="/messages/">Back To Messages</a></p>
+{% endblock %}
