@@ -3,7 +3,9 @@ from django.shortcuts import render
 from django.utils import timezone
 from django.db import connection
 from .models import Message
+# from django.contrib.auth.decorators import login_required
 
+# @login_required
 def index(request):
   if request.method == 'POST':
     content = request.POST['content']
@@ -17,6 +19,7 @@ def index(request):
     context = {'messages': messages}
     return render(request, 'messages/index.html', context)
 
+# @login_required
 def search(request):
   results = []
   if request.method == 'GET':
@@ -32,5 +35,6 @@ def search(request):
                                ''' % query).fetchall()
       for q in query_result:
         results.append({'content': q[0], 'user': q[1]})
+    # results = Message.objects.all().filter(content__icontains=query)
   context = {'messages': results}
   return render(request, 'messages/search.html', context)
